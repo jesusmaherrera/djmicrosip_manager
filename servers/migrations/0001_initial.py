@@ -7,15 +7,18 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('clients', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Cliente',
+            name='Server',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('nombre', models.CharField(max_length=200)),
-                ('rfc', models.CharField(max_length=18)),
+                ('name', models.CharField(max_length=100)),
+                ('user_name', models.CharField(max_length=100)),
+                ('mac_address', models.CharField(max_length=100)),
+                ('client', models.ForeignKey(to='clients.Client', unique=True)),
             ],
             options={
             },

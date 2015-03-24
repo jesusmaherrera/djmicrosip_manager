@@ -11,11 +11,11 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Aplicacion',
+            name='Company',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('nombre', models.CharField(max_length=200)),
-                ('descripcion', models.CharField(max_length=200)),
+                ('name', models.CharField(max_length=200)),
+                ('rfc', models.CharField(max_length=13)),
             ],
             options={
             },

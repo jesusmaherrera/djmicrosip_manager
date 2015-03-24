@@ -7,18 +7,15 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('aplicaciones', '0001_initial'),
-        ('clientes', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Installacion',
+            name='Application',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('fecha', models.DateTimeField()),
-                ('aplicacion', models.ForeignKey(to='aplicaciones.Aplicacion')),
-                ('cliente', models.ForeignKey(to='clientes.Cliente')),
+                ('name', models.CharField(max_length=100)),
+                ('description', models.CharField(max_length=200)),
             ],
             options={
             },
