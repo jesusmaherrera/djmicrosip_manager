@@ -3,7 +3,33 @@ from django.contrib import admin
 from servers.models import Server
 from clientapplications.models import ClientApplication
 from applications.models import Application
+from clients.models import Client
+from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
+
+# Serializers define the API representation.
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username',)
+
+# ViewSets define the view behavior.
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+# Serializers define the API representation.
+class ClientSerializer(serializers.HyperlinkedModelSerializer):
+    user = UserSerializer()
+    class Meta:
+        model = Client
+        fields = ('user',)
+
+# ViewSets define the view behavior.
+class ClientViewSet(viewsets.ModelViewSet):
+    queryset = Client.objects.all()
+    serializer_class = ClientSerializer
 
 # Serializers define the API representation.
 class ApplicationSerializer(serializers.HyperlinkedModelSerializer):
@@ -19,15 +45,24 @@ class ApplicationViewSet(viewsets.ModelViewSet):
 # Serializers define the API representation.
 class ClientApplicationSerializer(serializers.HyperlinkedModelSerializer):
     application = ApplicationSerializer()
-    
+    client = ClientSerializer()
+
     class Meta:
         model = ClientApplication
-        fields = ('application','version',)
+        fields = ('application','version','client',)
 
 # ViewSets define the view behavior.
 class ClientApplicationViewSet(viewsets.ModelViewSet):
     queryset = ClientApplication.objects.all()
     serializer_class = ClientApplicationSerializer
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the purchases for
+        the user as determined by the username portion of the URL.
+        """
+        client_id = self.kwargs['pk']
+        return ClientApplication.objects.filter(client__id=client_id)
 
 class ServerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
