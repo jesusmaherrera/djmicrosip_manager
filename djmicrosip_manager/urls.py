@@ -30,7 +30,7 @@ router.register(r'users', UserViewSet)
 router.register(r'applications', ApplicationViewSet)
 router.register(r'servers', ServerViewSet)
 router.register(r'companies', CompanyViewSet)
-router.register(r'clients', ClientViewSet)
+# router.register(r'clients', ClientViewSet)
 router.register(r'clientapplications', ClientApplicationViewSet)
 
 # Wire up our API using automatic URL routing.
@@ -39,6 +39,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'djmicrosip_manager.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
+    url(r'^', include('clients.urls')),
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', include(admin.site.urls)),
