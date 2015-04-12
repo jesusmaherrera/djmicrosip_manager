@@ -20,7 +20,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 # Routers provide an easy way of automatically determining the URL conf.
 from companies.views import CompanyViewSet
-from clients.views import ClientViewSet
+
 from applications.views import ApplicationViewSet
 from servers.views import ServerViewSet
 from clientapplications.views import ClientApplicationViewSet

@@ -4,8 +4,8 @@ from companies.models import Company
 
 class Client(models.Model):
     name = models.CharField(max_length=200)
-    # user = models.ForeignKey(User, unique=True)
-    # company =  models.ForeignKey(Company)
+    user = models.ForeignKey(User, unique=True)
+    company =  models.ForeignKey(Company)
 
     def __unicode__(self):
         return self.name
