@@ -14,9 +14,14 @@ class GetMyKey(APIView):
     """ 
     permission_classes = (permissions.IsAuthenticated,)
     
-    def get(self, request, format=None):
+    def get(self, request, format=None, macaddress=None, computername=None, username=None):
     	from microsip_api.core.crypt import EncoderSIC
-    	enc = EncoderSIC()
+        
+    	enc = EncoderSIC(
+    		macaddress = macaddress,
+    		computername = computername,
+    		username = username,
+    	)
     	key = enc.encrypt()
     	aplicaciones = ClientApplication.objects.filter(client__user = request.user).values_list('application__name', flat=True)
     	appskey = enc.encrypt_key_and_apps(
