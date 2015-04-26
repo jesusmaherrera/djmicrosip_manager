@@ -4,7 +4,7 @@ ehthumbs.db
 
 # Folder config file
 Desktop.ini
-
+env/
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
@@ -43,3 +43,4 @@ Temporary Items
 .apdisk
 *.pyc
 db.sqlite3
+distribute-0.6.15.tar.gz
